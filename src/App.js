@@ -2,6 +2,7 @@ import './App.css';
 import Header from './components/Layout/Header';
 import SubHeader from './components/Layout/SubHeader';
 import ListItem from './components/ListItem';
+import Product from './components/product';
 
 function App() {
   const data = [{
@@ -18,9 +19,10 @@ function App() {
   }]
   return (
     <>
-      <Header />
+      {/* <Header />
       <SubHeader />
-      <ListItem data={data} />
+      <ListItem data={data} /> */}
+      <Product />
     </>
   );
 }
