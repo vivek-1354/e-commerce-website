@@ -16,13 +16,20 @@ function App() {
     price: 350,
     title: "Digital Camera Lens",
     thumbnail: "https://images.pexels.com/photos/3602258/pexels-photo-3602258.jpeg?auto=compress&cs=tinysrgb&w=600"
-  }]
+  },
+  {
+    discountedPrice: 250,
+    price: 450,
+    title: "Camera",
+    thumbnail: "https://images.pexels.com/photos/3907507/pexels-photo-3907507.jpeg?auto=compress&cs=tinysrgb&w=600"
+  }
+  ]
   return (
     <>
-      {/* <Header />
+      <Header />
       <SubHeader />
-      <ListItem data={data} /> */}
-      <Product />
+      <ListItem data={data} />
+      {/* <Product /> */}
     </>
   );
 }

@@ -27,18 +27,23 @@ const SingleItem = ({ item }) => {
                         <span>  <i>{Math.floor(((item.price - item.discountedPrice) * 100) / item.price)} % off</i></span>
                     </small>
                 </div>
-                <div className={"title"}>
+                <center className={"title"}>
                     <h3>{item.title}</h3>
-                </div>
-                <button className={"cart-add"} id="cart-add">
-                    <span>Add to Cart</span>
-                    <img src="add-to-cart-svgrepo-com.svg" alt="" width="20px" />
-                </button>
-                <div className={"cart-addon"}>
-                    <button onClick={descreaseCounterByOne}><span>-</span></button>
-                    <span className={"counter"}>{counter}</span>
-                    <button onClick={increaseCounterByOne}><span>+</span></button>
-                </div>
+                </center>
+                {counter > 0 && <div className={"title"}>
+                    <h4>{"Select quantity"}</h4>
+                </div>}
+                {counter <= 0 ?
+                    <button className={"cart-add"} id="cart-add" onClick={() => setCounter(counter + 1)}>
+                        <span>Add to Cart</span>
+                        <img src="add-to-cart-svgrepo-com.svg" alt="" width="20px" />
+                    </button>
+                    : <div className={"cart-addon"}>
+                        <button onClick={descreaseCounterByOne}><span>-</span></button>
+                        <span className={"counter"}>{counter}</span>
+                        <button onClick={increaseCounterByOne}><span>+</span></button>
+                    </div>
+                }
             </div>
         </div>
     )
