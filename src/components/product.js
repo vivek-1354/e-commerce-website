@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import SingleItem from "./SingleItem"
 import Form from "./Form"
 
@@ -12,6 +12,13 @@ const oneItem = {
 
 const Product = () => {
     const [item, setItem] = useState([])
+    useEffect(() => {
+        async function getData() {
+            const response = await fetch("")
+            const data = await response.json()
+            setItem(data)
+        }
+    })
     return (
         <div className={"product-wrapper"}>
             <Form item={item} setItem={setItem} />

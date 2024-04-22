@@ -1,7 +1,9 @@
 import './App.css';
+import Counter from './components/Counter';
 import Header from './components/Layout/Header';
 import SubHeader from './components/Layout/SubHeader';
 import ListItem from './components/ListItem';
+import User from './components/User';
 import Product from './components/product';
 
 function App() {
@@ -28,8 +30,11 @@ function App() {
     <>
       <Header />
       <SubHeader />
-      <ListItem data={data} />
-      {/* <Product /> */}
+      <ListItem />
+      {/* <ListItem data={data} /> */}
+      {/* <Product />
+      {/* <User /> */}
+      {/* <Counter /> */}
     </>
   );
 }

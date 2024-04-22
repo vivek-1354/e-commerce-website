@@ -33,7 +33,7 @@ const SingleItem = ({ item }) => {
                 {counter > 0 && <div className={"title"}>
                     <h4>{"Select quantity"}</h4>
                 </div>}
-                {counter <= 0 ?
+                {counter < 1 ?
                     <button className={"cart-add"} id="cart-add" onClick={() => setCounter(counter + 1)}>
                         <span>Add to Cart</span>
                         <img src="add-to-cart-svgrepo-com.svg" alt="" width="20px" />
