@@ -5,7 +5,7 @@ const Header = () => {
         <header>
             <div class="nav-brand">
                 <a href="/">
-                    <span>AmaKart</span>
+                    <span>Your's Kart</span>
                     <img src="add-to-cart-svgrepo-com." alt="" width="50px" />
                     {/* <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="30"
                         height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round"
