@@ -1,15 +1,14 @@
 import React from 'react'
 import SingleItem from './SingleItem'
 import axios from 'axios'
-import Loader from './Layout/Loader'
+import Loader from '../Layout/Loader'
 
 
 
 
-const ListItem = ({ onAddItem, onRemoveItem }) => {
+const ListItem = ({ onAddItem, onRemoveItem, eventList }) => {
     const [products, setProducts] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(false)
-    const [presentItems, setPresentItems] = React.useState([])
 
     React.useEffect(() => {
         // async function getData() {
@@ -35,6 +34,16 @@ const ListItem = ({ onAddItem, onRemoveItem }) => {
             })
             .catch(err => console.log(err))
     }, [])
+
+    React.useEffect(() => {
+        if (eventList.id > -1) {
+            if (eventList.type === 1) {
+                handleAddItem(eventList.id)
+            } else if (eventList.type === -1) {
+                handleRemoveItem(eventList.id)
+            }
+        }
+    }, [eventList])
 
     const handleAddItem = id => {
         // if (presentItems.indexOf(id) > -1) {

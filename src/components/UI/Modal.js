@@ -1,7 +1,7 @@
 import React from 'react'
 import { Fragment } from 'react'
 import ReactDom from 'react-dom'
-import SingleItem from '../SingleItem'
+import SingleItem from '../Product/SingleItem'
 
 const Modal = ({ title, setIsOpen, children }) => {
     return (

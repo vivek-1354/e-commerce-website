@@ -1,5 +1,5 @@
 import React from 'react'
-import Modal from './UI/Modal';
+import Modal from '../UI/Modal';
 
 const SingleItem = ({ item, onAdd, onRemove }) => {
     // const [counter, setCounter] = React.useState(0)

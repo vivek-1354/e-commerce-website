@@ -10,10 +10,12 @@
         max-height: 400px;
         min-height: 300px;
         overflow-y: auto;
-
+        row-gap: 10px;
+        
         &-item {
             display: flex;
             flex-direction: row;
+            border-bottom: 1px solid black;
 
             .img-wrap {
                 flex-basis: 20%;
@@ -72,4 +74,32 @@
     margin: auto;
     color: gray;
     padding: 24px 0 48px;
+}
+
+.order-container {
+    display: flex;
+    align-content: center;
+    vertical-align: middle;
+    min-height: 350px;
+    
+    &--success {
+        margin: auto;
+        text-align: center;
+
+        img {
+            max-width: 200px;
+        }
+
+        .message {
+            h1 {
+                margin: 0;
+            }
+            h1, span {
+                margin-top: 8px;
+            }
+            span {
+                color: rgba($color: $black, $alpha: 0.5);
+            }
+        }
+    }
 }

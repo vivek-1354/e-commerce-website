@@ -2,7 +2,7 @@ import React from 'react'
 
 import Cart from "../Cart"
 
-const Header = ({ count, cartItems }) => {
+const Header = ({ count, cartItems, handleEventQueue }) => {
     return (
         <header>
             <div class="nav-brand">
@@ -43,7 +43,7 @@ const Header = ({ count, cartItems }) => {
                 </svg>
             </div>
             <div class="cart-container">
-                <Cart count={count} cartItems={cartItems} />
+                <Cart count={count} cartItems={cartItems} handleEventQueue={handleEventQueue} />
             </div>
         </header>
     )

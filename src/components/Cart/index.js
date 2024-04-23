@@ -1,35 +1,19 @@
 import React from "react";
 import Modal from "../UI/Modal";
+import CartItem from "./CartItem";
+import OrderSuccessModal from "../UI/OrderModal";
 
-const CartItem = ({ item, onEmitDecreaseItem, onEmitIncreaseItem }) => {
-    return (
-        <div className="checkout-modal_list-item">
-            <div className="img-wrap">
-                <img className="img-fluid" src={item.thumbnail} alt="" />
-            </div>
-            <div className="information">
-                <div>
-                    <h4>{item.title}</h4>
-                    <div className="pricing">
-                        <span>{item.discountedPrice}</span>
-                        <small><strike>{item.price}</strike></small>
-                    </div>
-                </div>
-                <div className="cart-addon cart-addon__modal">
-                    <button onClick={() => onEmitDecreaseItem(item.id)} >-</button>
-                    <span className="counter">{item.quantity}</span>
-                    <button onClick={() => onEmitIncreaseItem(item.id)} >+</button>
-                </div>
-            </div>
-        </div>
-    )
-}
-
-const Cart = ({ count, cartItems, onEmitDecreaseItem, onEmitIncreaseItem }) => {
+const Cart = ({ count, cartItems, handleEventQueue }) => {
     const [showModal, setShowModal] = React.useState(false)
+    const [showOrderModal, setShowOrderModal] = React.useState(false)
 
     const handleModal = () => {
         setShowModal(prev => !prev)
+    }
+
+    const handleOrderModal = () => {
+        setShowModal(false)
+        setShowOrderModal(prev => !prev)
     }
     return (
         <>
@@ -50,7 +34,7 @@ const Cart = ({ count, cartItems, onEmitDecreaseItem, onEmitIncreaseItem }) => {
                     <div className="checkout-modal_list">
                         {
                             count > 0 ?
-                                cartItems.map(item => <CartItem item={item} onEmitDecreaseItem={onEmitDecreaseItem} onEmitIncreaseItem={onEmitIncreaseItem} />) :
+                                cartItems.map(item => <CartItem item={item} onEmitDecreaseItem={id => handleEventQueue(id, -1)} onEmitIncreaseItem={id => handleEventQueue(id, 1)} />) :
                                 <div className="empty-cart">Please add someting in your cart</div>
                         }
                     </div>
@@ -65,10 +49,11 @@ const Cart = ({ count, cartItems, onEmitDecreaseItem, onEmitIncreaseItem }) => {
                                 }
                                 INR</h4>
                         </div>
-                        <button>Order Now</button>
+                        <button onClick={handleOrderModal}>Order Now</button>
                     </div>}
                 </div>
             </Modal>}
+            {showOrderModal && <OrderSuccessModal handleOrderModal={handleOrderModal} />}
         </>
     )
 }
