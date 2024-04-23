@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Header = () => {
+const Header = ({ count }) => {
     return (
         <header>
             <div class="nav-brand">
@@ -42,7 +42,7 @@ const Header = () => {
             </div>
             <div class="cart-container">
                 <button>
-                    <span data-items={5}>Cart</span>
+                    <span data-items={count}>Cart</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-plus" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <circle cx="6" cy="19" r="2" />

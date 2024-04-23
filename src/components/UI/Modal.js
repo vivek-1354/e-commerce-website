@@ -3,22 +3,18 @@ import { Fragment } from 'react'
 import ReactDom from 'react-dom'
 import SingleItem from '../SingleItem'
 
-const Modal = ({ item, setIsOpen }) => {
+const Modal = ({ title, setIsOpen, children }) => {
     return (
         <>
             {ReactDom.createPortal(
                 <Fragment>
                     <div className="modal">
                         <div>
-                            <h2>Modal Content! {item.title}</h2>
+                            <h2>{title}</h2><hr />
                             <button type="close" onClick={() => setIsOpen(false)}>X</button>
                         </div>
-                        <div>
-                            {item.description}
-                        </div>
-                        <div>{item.price}</div>
+                        <div>{children}</div>
                     </div>
-
                 </Fragment>
                 ,
                 document.getElementById("modal-root")

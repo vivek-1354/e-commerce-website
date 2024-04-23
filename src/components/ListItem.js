@@ -6,7 +6,7 @@ import Loader from './Layout/Loader'
 
 
 
-const ListItem = () => {
+const ListItem = ({ onAddItem, onRemoveItem }) => {
     const [products, setProducts] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(false)
 
@@ -31,7 +31,7 @@ const ListItem = () => {
         <div className={"product-list"}>
             {isLoading && <Loader />}
             <div className={"product-list--wrapper"}>
-                {products.length > 0 && products.map(item => <SingleItem item={item} />)}
+                {products.length > 0 && products.map(item => <SingleItem item={item} onAddItem={onAddItem} onRemoveItem={onRemoveItem} />)}
             </div>
         </div>
     )
