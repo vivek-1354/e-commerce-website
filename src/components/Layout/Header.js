@@ -2,7 +2,7 @@ import React from 'react'
 
 import Cart from "../Cart"
 
-const Header = ({ count }) => {
+const Header = ({ count, cartItems }) => {
     return (
         <header>
             <div class="nav-brand">
@@ -43,7 +43,7 @@ const Header = ({ count }) => {
                 </svg>
             </div>
             <div class="cart-container">
-                <Cart count={count} />
+                <Cart count={count} cartItems={cartItems} />
             </div>
         </header>
     )

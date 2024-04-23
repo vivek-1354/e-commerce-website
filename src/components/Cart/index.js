@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "../UI/Modal";
 
-const Cart = ({ count }) => {
+const Cart = ({ count, cartItems }) => {
     const [showModal, setShowModal] = React.useState(false)
 
     const handleModal = () => {
@@ -26,25 +26,25 @@ const Cart = ({ count }) => {
                     <div className="checkout-modal_list">
                         {
                             count > 0 ?
-                                <div className="checkout-modal_list-item">
+                                cartItems.map(item => <div className="checkout-modal_list-item">
                                     <div className="img-wrap">
-                                        <img className="img-fluid" src="pexels-olenkabohovyk-3819969.jpg" alt="" />
+                                        <img className="img-fluid" src={item.thumbnail} alt="" />
                                     </div>
                                     <div className="information">
                                         <div>
-                                            <h4>Title of the Product</h4>
+                                            <h4>{item.title}</h4>
                                             <div className="pricing">
-                                                <span>2000</span>
-                                                <small><strike>2500</strike></small>
+                                                <span>{item.discountedPrice}</span>
+                                                <small><strike>{item.price}</strike></small>
                                             </div>
                                         </div>
                                         <div className="cart-addon cart-addon__modal">
                                             <button>-</button>
-                                            <span className="counter">{0}</span>
+                                            <span className="counter">{item.quantity}</span>
                                             <button>+</button>
                                         </div>
                                     </div>
-                                </div> :
+                                </div>) :
                                 <div className="empty-cart">Please add someting in your cart</div>
                         }
                     </div>

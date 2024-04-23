@@ -22,7 +22,14 @@ const ListItem = ({ onAddItem, onRemoveItem }) => {
         axios.get("https://e-commerce-9691-default-rtdb.firebaseio.com/.json")
             .then(response => {
                 // setTimeout(() => {
-                setProducts(response.data.items)
+                const addQuantity = response.data.items.map(item => {
+                    return {
+                        ...item,
+                        quantity: 0
+                    }
+                })
+                // console.log(addQuantity)
+                setProducts(addQuantity)
                 setIsLoading(false)
                 // }, 5000)
             })
@@ -30,21 +37,33 @@ const ListItem = ({ onAddItem, onRemoveItem }) => {
     }, [])
 
     const handleAddItem = id => {
-        if (presentItems.indexOf(id) > -1) {
-            return
-        }
-        setPresentItems([...presentItems, id])
-        onAddItem()
+        // if (presentItems.indexOf(id) > -1) {
+        //     return
+        // }
+        // setPresentItems([...presentItems, id])
+        // onAddItem()
+        let data = [...products]
+        let index = data.findIndex(i => i.id === id)
+        data[index].quantity += 1
+        setProducts([...data])
+        onAddItem(data[index])
     }
 
     const handleRemoveItem = id => {
-        let index = presentItems.indexOf(id)
-        if (index > -1) {
-            let items = [...presentItems]
-            items.splice(index, 1)
-            setPresentItems([...items])
-            onRemoveItem()
+        // let index = presentItems.indexOf(id)
+        // if (index > -1) {
+        //     let items = [...presentItems]
+        //     items.splice(index, 1)
+        //     setPresentItems([...items])
+        //     onRemoveItem()
+        // }
+        let data = [...products]
+        let index = data.findIndex(i => i.id === id)
+        if (data[index].quantity !== 0) {
+            data[index].quantity -= 1
         }
+        setProducts([...data])
+        onRemoveItem(data[index].id)
     }
     return (
         <div className={"product-list"}>

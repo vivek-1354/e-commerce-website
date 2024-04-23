@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import SingleItem from "./SingleItem"
+import SingleItem from "../SingleItem"
 import Form from "./Form"
 
 const oneItem = {

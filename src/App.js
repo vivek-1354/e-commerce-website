@@ -1,25 +1,27 @@
 import './App.css';
 import React from 'react'
-import Counter from './components/Counter';
+import Counter from './components/UnUsedcom/Counter';
 import Header from './components/Layout/Header';
 import SubHeader from './components/Layout/SubHeader';
 import ListItem from './components/ListItem';
-import User from './components/User';
-import Product from './components/product';
+import User from './components/UnUsedcom/User';
+import Product from './components/UnUsedcom/product';
 
 function App() {
-  const [cartItems, setCartItems] = React.useState(0)
+  const [cartItems, setCartItems] = React.useState([])
 
-  const onAddItem = () => {
-    setCartItems(cartItems + 1)
+  const onAddItem = (item) => {
+    setCartItems([...cartItems, item])
   }
 
-  const onRemoveItem = () => {
-    setCartItems(cartItems - 1)
+  const onRemoveItem = (id) => {
+    let data = [...cartItems].filter(item => item.id !== id)
+    // setCartItems(cartItems - 1)
+    setCartItems([...data])
   }
   return (
     <>
-      <Header count={cartItems} />
+      <Header count={cartItems.length} cartItems={cartItems} />
       <SubHeader />
       <ListItem onAddItem={onAddItem} onRemoveItem={onRemoveItem} />
       {/* <ListItem data={data} /> */}
