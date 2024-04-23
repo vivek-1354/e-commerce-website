@@ -1,7 +1,31 @@
 import React from "react";
 import Modal from "../UI/Modal";
 
-const Cart = ({ count, cartItems }) => {
+const CartItem = ({ item, onEmitDecreaseItem, onEmitIncreaseItem }) => {
+    return (
+        <div className="checkout-modal_list-item">
+            <div className="img-wrap">
+                <img className="img-fluid" src={item.thumbnail} alt="" />
+            </div>
+            <div className="information">
+                <div>
+                    <h4>{item.title}</h4>
+                    <div className="pricing">
+                        <span>{item.discountedPrice}</span>
+                        <small><strike>{item.price}</strike></small>
+                    </div>
+                </div>
+                <div className="cart-addon cart-addon__modal">
+                    <button onClick={() => onEmitDecreaseItem(item.id)} >-</button>
+                    <span className="counter">{item.quantity}</span>
+                    <button onClick={() => onEmitIncreaseItem(item.id)} >+</button>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+const Cart = ({ count, cartItems, onEmitDecreaseItem, onEmitIncreaseItem }) => {
     const [showModal, setShowModal] = React.useState(false)
 
     const handleModal = () => {
@@ -26,32 +50,20 @@ const Cart = ({ count, cartItems }) => {
                     <div className="checkout-modal_list">
                         {
                             count > 0 ?
-                                cartItems.map(item => <div className="checkout-modal_list-item">
-                                    <div className="img-wrap">
-                                        <img className="img-fluid" src={item.thumbnail} alt="" />
-                                    </div>
-                                    <div className="information">
-                                        <div>
-                                            <h4>{item.title}</h4>
-                                            <div className="pricing">
-                                                <span>{item.discountedPrice}</span>
-                                                <small><strike>{item.price}</strike></small>
-                                            </div>
-                                        </div>
-                                        <div className="cart-addon cart-addon__modal">
-                                            <button>-</button>
-                                            <span className="counter">{item.quantity}</span>
-                                            <button>+</button>
-                                        </div>
-                                    </div>
-                                </div>) :
+                                cartItems.map(item => <CartItem item={item} onEmitDecreaseItem={onEmitDecreaseItem} onEmitIncreaseItem={onEmitIncreaseItem} />) :
                                 <div className="empty-cart">Please add someting in your cart</div>
                         }
                     </div>
                     {count > 0 && <div className="checkout-modal_footer">
                         <div className="totalAmount">
                             <h4>Total Amount: </h4>
-                            <h4>2000 INR</h4>
+                            <h4>
+                                {
+                                    cartItems.reduce((previous, current) => {
+                                        return previous + (current.discountedPrice * current.quantity)
+                                    }, 0)
+                                }
+                                INR</h4>
                         </div>
                         <button>Order Now</button>
                     </div>}

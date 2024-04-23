@@ -63,7 +63,7 @@ const ListItem = ({ onAddItem, onRemoveItem }) => {
             data[index].quantity -= 1
         }
         setProducts([...data])
-        onRemoveItem(data[index].id)
+        onRemoveItem(data[index])
     }
     return (
         <div className={"product-list"}>
