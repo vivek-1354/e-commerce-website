@@ -1,21 +1,25 @@
 import React from 'react'
 import Modal from './UI/Modal';
 
-const SingleItem = ({ item, onAddItem, onRemoveItem }) => {
+const SingleItem = ({ item, onAdd, onRemove }) => {
     const [counter, setCounter] = React.useState(0)
     const [isOpen, setIsOpen] = React.useState(false)
 
     const increaseCounterByOne = (event) => {
         event.stopPropagation()
         // Add increasing logic
+        onAdd(item.id)
         setCounter(counter + 1);
     }
 
     const descreaseCounterByOne = (event) => {
         event.stopPropagation()
         // Add descreasing logic
-        if (counter <= 0) {
+        if (counter === 0) {
             return;
+        }
+        if (counter === 1) {
+            onRemove(item.id)
         }
         setCounter(counter - 1);
     }
@@ -35,11 +39,11 @@ const SingleItem = ({ item, onAddItem, onRemoveItem }) => {
                     <center className={"title"}>
                         <h3>{item.title}</h3>
                     </center>
-                    {counter > 0 && <div className={"title"}>
+                    {/* {counter > 0 && <div className={"title"}>
                         <h4>{"Select quantity"}</h4>
-                    </div>}
-                    <button className={"cart-add"} id="cart-add" onClick={() => onAddItem(pre => pre + 1)}>
-                        <span>Add to Cart</span>
+                    </div>} */}
+                    <button className={"cart-add"} id="cart-add" onClick={increaseCounterByOne}>
+                        <span>{counter > 0 ? "Added to cart" : "Add to Cart"}</span>
                         <img src="add-to-cart-svgrepo-com.svg" alt="" width="20px" />
                     </button>
                 </div>
@@ -58,7 +62,7 @@ const SingleItem = ({ item, onAddItem, onRemoveItem }) => {
                             </div>
                             <p>{item.description}</p>
                             {counter < 1 ?
-                                <button className={"cart-add"} id="cart-add" onClick={() => setCounter(counter + 1)}>
+                                <button className={"cart-add"} id="cart-add" onClick={increaseCounterByOne}>
                                     <span>Add to Cart</span>
                                     <img src="add-to-cart-svgrepo-com.svg" alt="" width="20px" />
                                 </button>

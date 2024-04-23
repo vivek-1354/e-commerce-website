@@ -7,7 +7,7 @@ const Modal = ({ title, setIsOpen, children }) => {
     return (
         <>
             {ReactDom.createPortal(
-                <Fragment>
+                <>
                     <div className="modal">
                         <div>
                             <h2>{title}</h2><hr />
@@ -15,7 +15,7 @@ const Modal = ({ title, setIsOpen, children }) => {
                         </div>
                         <div>{children}</div>
                     </div>
-                </Fragment>
+                </>
                 ,
                 document.getElementById("modal-root")
             )}
