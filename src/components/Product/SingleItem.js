@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from '../UI/Modal';
 import { useDispatch, useSelector } from 'react-redux';
+import { addItemHandler, removeItemHandler } from '../../actions';
 
 const SingleItem = ({ data }) => {
     // const [counter, setCounter] = React.useState(0)
@@ -11,17 +12,19 @@ const SingleItem = ({ data }) => {
 
     const increaseCounterByOne = (event) => {
         event.stopPropagation()
-        dispatch({
-            type: "ADD_ITEM",
-            payload: {
-                item: data
-            }
-        })
+        // dispatch({
+        //     type: "ADD_ITEM",
+        //     payload: {
+        //         item: data
+        //     }
+        // })
+        dispatch(addItemHandler(data))
     }
 
     const descreaseCounterByOne = (event) => {
         event.stopPropagation()
-        dispatch({ type: "REMOVE_ITEM", payload: { id: data.id } })
+        // dispatch({ type: "REMOVE_ITEM", payload: { id: data.id } })
+        dispatch(removeItemHandler(data.id))
     }
 
     return (

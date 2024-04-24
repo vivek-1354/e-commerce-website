@@ -3,6 +3,7 @@ import Modal from "../UI/Modal";
 import CartItem from "./CartItem";
 import OrderSuccessModal from "../UI/OrderModal";
 import { useDispatch, useSelector } from "react-redux";
+import { clearCartHandler } from "../../actions";
 
 const Cart = () => {
     const [showModal, setShowModal] = React.useState(false)
@@ -10,7 +11,7 @@ const Cart = () => {
 
 
     // getting items list from redux store
-    const cartItems = useSelector(state => state.items)
+    const { items, totalAmount } = useSelector(state => state)
 
     const dispatch = useDispatch()
 
@@ -20,13 +21,13 @@ const Cart = () => {
 
     const handleOrderModal = () => {
         setShowModal(false)
-        dispatch({ type: "CLEAR_CART" })
+        dispatch(clearCartHandler())
         setShowOrderModal(prev => !prev)
     }
     return (
         <>
             <button onClick={handleModal}>
-                <span data-items={cartItems.length}>Cart</span>
+                <span data-items={items.length}>Cart</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-plus" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <circle cx="6" cy="19" r="2" />
@@ -41,21 +42,22 @@ const Cart = () => {
                     <h2>Checkout Modal</h2>
                     <div className="checkout-modal_list">
                         {
-                            cartItems.length > 0 ?
-                                cartItems.map(item => <CartItem item={item} />) :
+                            items.length > 0 ?
+                                items.map(item => <CartItem item={item} />) :
                                 <div className="empty-cart">Please add someting in your cart</div>
                         }
                     </div>
-                    {cartItems.length > 0 && <div className="checkout-modal_footer">
+                    {items.length > 0 && <div className="checkout-modal_footer">
                         <div className="totalAmount">
                             <h4>Total Amount: </h4>
                             <h4>
-                                {
+                                {/* {
                                     cartItems.reduce((previous, current) => {
                                         return previous + (current.discountedPrice * current.quantity)
                                     }, 0)
-                                }
-                                INR</h4>
+                                } */}
+                                {totalAmount}
+                                _INR</h4>
                         </div>
                         <button onClick={handleOrderModal}>Order Now</button>
                     </div>}

@@ -1,15 +1,15 @@
-import { createStore, applyMiddleware, legacy_createStore } from "redux";
+import { applyMiddleware, legacy_createStore } from "redux";
 
-import thunk from 'redux-thunk'
+import { thunk } from 'redux-thunk'
 import mainReducer from "../reducers";
 
-const store = createStore(
+const store = legacy_createStore(
     mainReducer,
     {
         items: [],
         totalAmount: 0
     },
-    // applyMiddleware()
+    applyMiddleware(thunk)
 )
 
 
