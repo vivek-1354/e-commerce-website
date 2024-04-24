@@ -1,19 +1,16 @@
 import { createStore, applyMiddleware } from "redux";
 
 import thunk from 'redux-thunk'
+import mainReducer from "../reducers";
 
-const rootReducer = (state, action) => {
-    // switch (action.type){
-
-    // }
-    return state
-}
-
-export const store = createStore(
-    rootReducer,
+const store = createStore(
+    mainReducer,
     {
         items: [],
         totalAmount: 0
     },
     applyMiddleware()
 )
+
+
+export default store
