@@ -1,4 +1,7 @@
-const CartItem = ({ item, onEmitDecreaseItem, onEmitIncreaseItem }) => {
+import { useDispatch } from "react-redux";
+
+const CartItem = ({ item }) => {
+    const dispatch = useDispatch()
     return (
         <div className="checkout-modal_list-item">
             <div className="img-wrap">
@@ -13,9 +16,9 @@ const CartItem = ({ item, onEmitDecreaseItem, onEmitIncreaseItem }) => {
                     </div>
                 </div>
                 <div className="cart-addon cart-addon__modal">
-                    <button onClick={() => onEmitDecreaseItem(item.id)} >-</button>
+                    <button onClick={() => dispatch({ type: "REMOVE_ITEM", payload: { id: item.id } })} >-</button>
                     <span className="counter">{item.quantity}</span>
-                    <button onClick={() => onEmitIncreaseItem(item.id)} >+</button>
+                    <button onClick={() => dispatch({ type: "ADD_ITEM", payload: { item: item } })} >+</button>
                 </div>
             </div>
         </div>

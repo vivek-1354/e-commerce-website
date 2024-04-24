@@ -1,68 +1,67 @@
-import React from 'react'
+import React from 'react';
 import Modal from '../UI/Modal';
+import { useDispatch, useSelector } from 'react-redux';
 
-const SingleItem = ({ item, onAdd, onRemove }) => {
+const SingleItem = ({ data }) => {
     // const [counter, setCounter] = React.useState(0)
     const [isOpen, setIsOpen] = React.useState(false)
 
+    const item = useSelector(state => state.items.find(item => item.id === data.id))
+    const dispatch = useDispatch()
+
     const increaseCounterByOne = (event) => {
         event.stopPropagation()
-        // Add increasing logic
-        onAdd(item.id)
-        // setCounter(counter + 1);
+        dispatch({
+            type: "ADD_ITEM",
+            payload: {
+                item: data
+            }
+        })
     }
 
     const descreaseCounterByOne = (event) => {
         event.stopPropagation()
-        onRemove(item.id)
-        // Add descreasing logic
-        // if (item.quantity === 0) {
-        //     return;
-        // }
-        // if (item.quantity === 1) {
-        //     onRemove(item.id)
-        // }
-        // setCounter(counter - 1);
+        dispatch({ type: "REMOVE_ITEM", payload: { id: data.id } })
     }
 
     return (
         <>
             <div className={'item-card'} onClick={setIsOpen}>
-                <img className={"img-fluid"} src={item.thumbnail} alt="" />
+                <img className={"img-fluid"} src={data.thumbnail} alt="" />
                 <div className={"item-card__information"} >
                     <div className={"pricing"}>
-                        <span>Rs.{item.discountedPrice}</span>
+                        <span>Rs.{data.discountedPrice}</span>
                         <small>
-                            <strike>{item.price}</strike>
-                            <span>  <i>{Math.floor(((item.price - item.discountedPrice) * 100) / item.price)} % off</i></span>
+                            <strike>{data.price}</strike>
+                            <span>  <i>{Math.floor(((data.price - data.discountedPrice) * 100) / data.price)} % off</i></span>
                         </small>
                     </div>
                     <center className={"title"}>
-                        <h3>{item.title}</h3>
+                        <h3>{data.title}</h3>
                     </center>
                     {/* {counter > 0 && <div className={"title"}>
                         <h4>{"Select quantity"}</h4>
                     </div>} */}
                     <button className={"cart-add"} id="cart-add" onClick={increaseCounterByOne}>
-                        <span>{item.quantity > 0 ? "Added to cart" : "Add to Cart"}</span>
+                        <span>{!item || item?.quantity > 0 ? "Add to cart" : "Added to Cart"}</span>
                         <img src="add-to-cart-svgrepo-com.svg" alt="" width="20px" />
                     </button>
                 </div>
             </div>
             {isOpen &&
-                <Modal title={item.title} setIsOpen={setIsOpen}>
+                <Modal title={data.title} setIsOpen={setIsOpen}>
                     <div className="item-card__modal">
                         <div className="img-wrap">
-                            <img className={"img-fluid"} src={item.thumbnail} alt="" />
+                            <img className={"img-fluid"} src={data.thumbnail} alt="" />
                         </div>
                         <div className="meta">
-                            <h3>{item.title}</h3>
+                            <h3>{data.title}</h3>
                             <div className="pricing">
-                                <span>Rs.{item.discountedPrice}</span>
-                                <small><strike>{item.price}</strike></small>
+                                <span>Rs.{data.discountedPrice}</span>
+                                <small><strike>{data.price}</strike></small>
                             </div>
-                            <p>{item.description}</p>
-                            {item.quantity < 1 ?
+                            <p>{data.description}</p>
+                            {!item || item?.quantity < 1 ?
                                 <button className={"cart-add"} id="cart-add" onClick={increaseCounterByOne}>
                                     <span>Add to Cart</span>
                                     <img src="add-to-cart-svgrepo-com.svg" alt="" width="20px" />

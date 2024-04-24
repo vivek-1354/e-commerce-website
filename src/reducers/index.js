@@ -1,4 +1,4 @@
-const mainReducer = (state, action) => {
+const mainReducer = (state = { items: [], totalAmount: 0 }, action) => {
     const { type, payload } = action
 
     switch (type) {

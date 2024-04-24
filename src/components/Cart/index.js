@@ -2,10 +2,17 @@ import React from "react";
 import Modal from "../UI/Modal";
 import CartItem from "./CartItem";
 import OrderSuccessModal from "../UI/OrderModal";
+import { useDispatch, useSelector } from "react-redux";
 
-const Cart = ({ count, cartItems, handleEventQueue }) => {
+const Cart = () => {
     const [showModal, setShowModal] = React.useState(false)
     const [showOrderModal, setShowOrderModal] = React.useState(false)
+
+
+    // getting items list from redux store
+    const cartItems = useSelector(state => state.items)
+
+    const dispatch = useDispatch()
 
     const handleModal = () => {
         setShowModal(prev => !prev)
@@ -13,12 +20,13 @@ const Cart = ({ count, cartItems, handleEventQueue }) => {
 
     const handleOrderModal = () => {
         setShowModal(false)
+        dispatch({ type: "CLEAR_CART" })
         setShowOrderModal(prev => !prev)
     }
     return (
         <>
             <button onClick={handleModal}>
-                <span data-items={count}>Cart</span>
+                <span data-items={cartItems.length}>Cart</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-plus" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <circle cx="6" cy="19" r="2" />
@@ -33,12 +41,12 @@ const Cart = ({ count, cartItems, handleEventQueue }) => {
                     <h2>Checkout Modal</h2>
                     <div className="checkout-modal_list">
                         {
-                            count > 0 ?
-                                cartItems.map(item => <CartItem item={item} onEmitDecreaseItem={id => handleEventQueue(id, -1)} onEmitIncreaseItem={id => handleEventQueue(id, 1)} />) :
+                            cartItems.length > 0 ?
+                                cartItems.map(item => <CartItem item={item} />) :
                                 <div className="empty-cart">Please add someting in your cart</div>
                         }
                     </div>
-                    {count > 0 && <div className="checkout-modal_footer">
+                    {cartItems.length > 0 && <div className="checkout-modal_footer">
                         <div className="totalAmount">
                             <h4>Total Amount: </h4>
                             <h4>
