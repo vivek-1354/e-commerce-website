@@ -51,34 +51,39 @@ const SingleItem = ({ data }) => {
                     </button>
                 </div>
             </div>
-            {isOpen &&
-                <Modal title={data.title} setIsOpen={setIsOpen}>
-                    <div className="item-card__modal">
-                        <div className="img-wrap">
-                            <img className={"img-fluid"} src={data.thumbnail} alt="" />
-                        </div>
-                        <div className="meta">
-                            <h3>{data.title}</h3>
-                            <div className="pricing">
-                                <span>Rs.{data.discountedPrice}</span>
-                                <small><strike>{data.price}</strike></small>
-                            </div>
-                            <p>{data.description}</p>
-                            {!item || item?.quantity < 1 ?
-                                <button className={"cart-add"} id="cart-add" onClick={increaseCounterByOne}>
-                                    <span>Add to Cart</span>
-                                    <img src="add-to-cart-svgrepo-com.svg" alt="" width="20px" />
-                                </button>
-                                : <div className={"cart-addon"}>
-                                    <button onClick={descreaseCounterByOne}><span>-</span></button>
-                                    <span className={"counter"}>{item.quantity}</span>
-                                    <button onClick={increaseCounterByOne}><span>+</span></button>
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </Modal>}
+            {isOpen && <SingleItemDetails data={data} item={item} setIsOpen={setIsOpen} increaseCounterByOne={increaseCounterByOne} descreaseCounterByOne={descreaseCounterByOne} />}
         </>
+    )
+}
+
+const SingleItemDetails = ({ data, item, setIsOpen, increaseCounterByOne, descreaseCounterByOne }) => {
+    return (
+        <Modal title={data.title} setIsOpen={setIsOpen}>
+            <div className="item-card__modal">
+                <div className="img-wrap">
+                    <img className={"img-fluid"} src={data.thumbnail} alt="" />
+                </div>
+                <div className="meta">
+                    <h3>{data.title}</h3>
+                    <div className="pricing">
+                        <span>Rs.{data.discountedPrice}</span>
+                        <small><strike>{data.price}</strike></small>
+                    </div>
+                    <p>{data.description}</p>
+                    {!item || item?.quantity < 1 ?
+                        <button className={"cart-add"} id="cart-add" onClick={increaseCounterByOne}>
+                            <span>Add to Cart</span>
+                            <img src="add-to-cart-svgrepo-com.svg" alt="" width="20px" />
+                        </button>
+                        : <div className={"cart-addon"}>
+                            <button onClick={descreaseCounterByOne}><span>-</span></button>
+                            <span className={"counter"}>{item.quantity}</span>
+                            <button onClick={increaseCounterByOne}><span>+</span></button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </Modal>
     )
 }
 
