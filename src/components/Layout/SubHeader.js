@@ -1,14 +1,16 @@
 import React from 'react'
 
+import { Link } from 'react-router-dom'
 const SubHeader = () => {
     return (
         <div class="subheader-container">
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">Category 1</a></li>
-                <li><a href="">Category 2</a></li>
-                <li><a href="">Category 3</a></li>
-                <li><a href="">Category 4</a></li>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/men">Men</Link></li>
+                <li><Link to="/women">Women</Link></li>
+                <li><Link to="/kids">Kids</Link></li>
+                <li><Link to="/kitchen">Kitchen</Link></li>
+                <li><Link to="/sports">Sports</Link></li>
             </ul>
         </div>
     )
